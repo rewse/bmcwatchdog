@@ -1,0 +1,18 @@
+#!/bin/sh
+#####################################################################
+# @(#) BMC Watch Dog Timer Reset Tool
+#
+# Author: Tats Shibata
+# License: http://rewse.jp/license/2011.01.txt
+#
+# Copyright (c) 2011, Rewse Lab. All rights reserved.
+#####################################################################
+
+STATE=`ipmitool mc watchdog get | grep 'Watchdog Timer Is:' | awk '{print $4}'`
+
+if [ $STATE == "Started/Running" ]; then
+  ipmitool mc watchdog reset 2>&1 | grep -v restarted
+else
+  echo "[ERROR] Watchdog Timer is $STATE" >&2
+  exit 1
+fi
