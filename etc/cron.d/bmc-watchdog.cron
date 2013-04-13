@@ -1,0 +1,1 @@
+* * * * * root /usr/sbin/bmc-watchdog -s -w -k -u 4 -p 0 -a 1 -F -P -L -S -O -i 600
